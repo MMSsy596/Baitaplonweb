@@ -1,0 +1,37 @@
+﻿@model Baitaplonweb.Models.GiaoVien
+
+@{
+    ViewBag.Title = "Xóa Giáo Viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa Giáo Viên</h2>
+
+<h3>Bạn có chắc chắn muốn xóa giáo viên này không?</h3>
+<div>
+    <h4>Giáo Viên</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+        <dd>
+            @Model.HoTen.Trim()
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChuyenMon)
+        </dt>
+        <dd>
+            @Model.ChuyenMon.Trim()
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

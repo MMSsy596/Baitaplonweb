@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuanLyKhoaHocModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="role" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DangKyKhoaHoc">
+          <Key>
+            <PropertyRef Name="DangKyID" />
+          </Key>
+          <Property Name="DangKyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NguoiDangKyID" Type="int" Nullable="false" />
+          <Property Name="KhoaHocID" Type="int" Nullable="false" />
+          <Property Name="NgayDangKy" Type="date" />
+        </EntityType>
+        <EntityType Name="GiaoVien">
+          <Key>
+            <PropertyRef Name="GiaoVienID" />
+          </Key>
+          <Property Name="GiaoVienID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoDienThoai" Type="nvarchar" MaxLength="15" />
+          <Property Name="ChuyenMon" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="KhoaHoc">
+          <Key>
+            <PropertyRef Name="KhoaHocID" />
+          </Key>
+          <Property Name="KhoaHocID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenKhoaHoc" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="GiaoVienID" Type="int" />
+          <Property Name="NgayBatDau" Type="date" />
+          <Property Name="NgayKetThuc" Type="date" />
+        </EntityType>
+        <EntityType Name="NguoiDangKy">
+          <Key>
+            <PropertyRef Name="NguoiDangKyID" />
+          </Key>
+          <Property Name="NguoiDangKyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoDienThoai" Type="nvarchar" MaxLength="15" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__DangKyKho__KhoaH__4222D4EF">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="DangKyKhoaHoc" Type="Self.DangKyKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Principal>
+            <Dependent Role="DangKyKhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DangKyKho__Nguoi__412EB0B6">
+          <End Role="NguoiDangKy" Type="Self.NguoiDangKy" Multiplicity="1" />
+          <End Role="DangKyKhoaHoc" Type="Self.DangKyKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDangKy">
+              <PropertyRef Name="NguoiDangKyID" />
+            </Principal>
+            <Dependent Role="DangKyKhoaHoc">
+              <PropertyRef Name="NguoiDangKyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhoaHoc__GiaoVie__3A81B327">
+          <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="0..1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaoVien">
+              <PropertyRef Name="GiaoVienID" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="GiaoVienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyKhoaHocModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DangKyKhoaHoc" EntityType="Self.DangKyKhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiaoVien" EntityType="Self.GiaoVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiDangKy" EntityType="Self.NguoiDangKy" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DangKyKho__KhoaH__4222D4EF" Association="Self.FK__DangKyKho__KhoaH__4222D4EF">
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+            <End Role="DangKyKhoaHoc" EntitySet="DangKyKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DangKyKho__Nguoi__412EB0B6" Association="Self.FK__DangKyKho__Nguoi__412EB0B6">
+            <End Role="NguoiDangKy" EntitySet="NguoiDangKy" />
+            <End Role="DangKyKhoaHoc" EntitySet="DangKyKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhoaHoc__GiaoVie__3A81B327" Association="Self.FK__KhoaHoc__GiaoVie__3A81B327">
+            <End Role="GiaoVien" EntitySet="GiaoVien" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyKhoaHocModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DangKyKhoaHoc">
+          <Key>
+            <PropertyRef Name="DangKyID" />
+          </Key>
+          <Property Name="DangKyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NguoiDangKyID" Type="Int32" Nullable="false" />
+          <Property Name="KhoaHocID" Type="Int32" Nullable="false" />
+          <Property Name="NgayDangKy" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="KhoaHoc" Relationship="Self.FK__DangKyKho__KhoaH__4222D4EF" FromRole="DangKyKhoaHoc" ToRole="KhoaHoc" />
+          <NavigationProperty Name="NguoiDangKy" Relationship="Self.FK__DangKyKho__Nguoi__412EB0B6" FromRole="DangKyKhoaHoc" ToRole="NguoiDangKy" />
+        </EntityType>
+        <EntityType Name="GiaoVien">
+          <Key>
+            <PropertyRef Name="GiaoVienID" />
+          </Key>
+          <Property Name="GiaoVienID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ChuyenMon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhoaHoc" Relationship="Self.FK__KhoaHoc__GiaoVie__3A81B327" FromRole="GiaoVien" ToRole="KhoaHoc" />
+        </EntityType>
+        <EntityType Name="KhoaHoc">
+          <Key>
+            <PropertyRef Name="KhoaHocID" />
+          </Key>
+          <Property Name="KhoaHocID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKhoaHoc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaoVienID" Type="Int32" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="0" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DangKyKhoaHoc" Relationship="Self.FK__DangKyKho__KhoaH__4222D4EF" FromRole="KhoaHoc" ToRole="DangKyKhoaHoc" />
+          <NavigationProperty Name="GiaoVien" Relationship="Self.FK__KhoaHoc__GiaoVie__3A81B327" FromRole="KhoaHoc" ToRole="GiaoVien" />
+        </EntityType>
+        <EntityType Name="NguoiDangKy">
+          <Key>
+            <PropertyRef Name="NguoiDangKyID" />
+          </Key>
+          <Property Name="NguoiDangKyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DangKyKhoaHoc" Relationship="Self.FK__DangKyKho__Nguoi__412EB0B6" FromRole="NguoiDangKy" ToRole="DangKyKhoaHoc" />
+        </EntityType>
+        <Association Name="FK__DangKyKho__KhoaH__4222D4EF">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="DangKyKhoaHoc" Type="Self.DangKyKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Principal>
+            <Dependent Role="DangKyKhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DangKyKho__Nguoi__412EB0B6">
+          <End Role="NguoiDangKy" Type="Self.NguoiDangKy" Multiplicity="1" />
+          <End Role="DangKyKhoaHoc" Type="Self.DangKyKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDangKy">
+              <PropertyRef Name="NguoiDangKyID" />
+            </Principal>
+            <Dependent Role="DangKyKhoaHoc">
+              <PropertyRef Name="NguoiDangKyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhoaHoc__GiaoVie__3A81B327">
+          <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="0..1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaoVien">
+              <PropertyRef Name="GiaoVienID" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="GiaoVienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyKhoaHocEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DangKyKhoaHoc" EntityType="Self.DangKyKhoaHoc" />
+          <EntitySet Name="GiaoVien" EntityType="Self.GiaoVien" />
+          <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" />
+          <EntitySet Name="NguoiDangKy" EntityType="Self.NguoiDangKy" />
+          <AssociationSet Name="FK__DangKyKho__KhoaH__4222D4EF" Association="Self.FK__DangKyKho__KhoaH__4222D4EF">
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+            <End Role="DangKyKhoaHoc" EntitySet="DangKyKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DangKyKho__Nguoi__412EB0B6" Association="Self.FK__DangKyKho__Nguoi__412EB0B6">
+            <End Role="NguoiDangKy" EntitySet="NguoiDangKy" />
+            <End Role="DangKyKhoaHoc" EntitySet="DangKyKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhoaHoc__GiaoVie__3A81B327" Association="Self.FK__KhoaHoc__GiaoVie__3A81B327">
+            <End Role="GiaoVien" EntitySet="GiaoVien" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <EntitySet Name="account" EntityType="QuanLyKhoaHocModel.account" />
+        </EntityContainer>
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyKhoaHocModelStoreContainer" CdmEntityContainer="QuanLyKhoaHocEntities1">
+          <EntitySetMapping Name="DangKyKhoaHoc">
+            <EntityTypeMapping TypeName="QuanLyKhoaHocModel.DangKyKhoaHoc">
+              <MappingFragment StoreEntitySet="DangKyKhoaHoc">
+                <ScalarProperty Name="DangKyID" ColumnName="DangKyID" />
+                <ScalarProperty Name="NguoiDangKyID" ColumnName="NguoiDangKyID" />
+                <ScalarProperty Name="KhoaHocID" ColumnName="KhoaHocID" />
+                <ScalarProperty Name="NgayDangKy" ColumnName="NgayDangKy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiaoVien">
+            <EntityTypeMapping TypeName="QuanLyKhoaHocModel.GiaoVien">
+              <MappingFragment StoreEntitySet="GiaoVien">
+                <ScalarProperty Name="GiaoVienID" ColumnName="GiaoVienID" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="ChuyenMon" ColumnName="ChuyenMon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhoaHoc">
+            <EntityTypeMapping TypeName="QuanLyKhoaHocModel.KhoaHoc">
+              <MappingFragment StoreEntitySet="KhoaHoc">
+                <ScalarProperty Name="KhoaHocID" ColumnName="KhoaHocID" />
+                <ScalarProperty Name="TenKhoaHoc" ColumnName="TenKhoaHoc" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="GiaoVienID" ColumnName="GiaoVienID" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiDangKy">
+            <EntityTypeMapping TypeName="QuanLyKhoaHocModel.NguoiDangKy">
+              <MappingFragment StoreEntitySet="NguoiDangKy">
+                <ScalarProperty Name="NguoiDangKyID" ColumnName="NguoiDangKyID" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="account">
+            <EntityTypeMapping TypeName="QuanLyKhoaHocModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

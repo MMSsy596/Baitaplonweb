@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AcountList</title>
+</head>
+<body>
+
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>username</th>
+                <th>password</th>
+                <th>role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ac in Model)
+            {
+                <tr>
+                    <td>@ac.username</td>
+                    <td>@ac.password</td>
+                    <td>@ac.role</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f66724d85a664d19aed9f1968392e5f6" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyKhoaHocModel.DangKyKhoaHoc" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyKhoaHocModel.GiaoVien" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyKhoaHocModel.KhoaHoc" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyKhoaHocModel.NguoiDangKy" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="QuanLyKhoaHocModel.FK__DangKyKho__KhoaH__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoaHocModel.FK__DangKyKho__Nguoi__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyKhoaHocModel.FK__KhoaHoc__GiaoVie__3A81B327" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanLyKhoaHocModel.account" Width="1.5" PointX="7.75" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
